@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 
-const DeatilScrenn = ({route, navigation}) => {
+const DetailScreen = ({route, navigation}) => {
   useEffect(() => {
     navigation.setOptions({
       title: '상세 정보 - ${route.params.id}',
@@ -37,4 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DeatilScrenn;
+export default DetailScreen;
