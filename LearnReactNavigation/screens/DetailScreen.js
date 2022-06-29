@@ -1,17 +1,23 @@
 import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
+import {useRoute} from '@react-navigation/native';
+
+const IdText = () => {
+  const route = useRoute();
+  return <Text style={styles.text}>id: {route.params.id}</Text>;
+};
 
 const DetailScreen = ({route, navigation}) => {
   useEffect(() => {
     navigation.setOptions({
-      title: '상세 정보 - ${route.params.id}',
+      title: `상세 정보 - ${route.params.id}`,
     });
   }, [navigation, route.params.id]);
 
-  reutrn(
+  return (
     <View style={styles.block}>
-      <Text style={styles.text}>id: {route.params.id}</Text>
-      <View style={style.buttons}>
+      <View style={styles.buttons}>
+        <IdText />
         <Button
           title="다음"
           onPress={() => navigation.push('Detail', {id: route.params.id + 1})}
@@ -19,7 +25,7 @@ const DetailScreen = ({route, navigation}) => {
         <Button title="뒤로가기" onPress={() => navigation.pop()} />
         <Button title="처음으로" onPress={() => navigation.popToTop()} />
       </View>
-    </View>,
+    </View>
   );
 };
 
