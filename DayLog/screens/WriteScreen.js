@@ -9,16 +9,17 @@ import {useNavigation} from '@react-navigation/native';
 const WriteScreen = ({route}) => {
   const log = route.params?.log;
 
-  const [title, setTitle] = useState(log.title ?? '');
-  const [body, setBody] = useState(log.body ?? '');
+  const [title, setTitle] = useState(log?.title ?? '');
+  const [body, setBody] = useState(log?.body ?? '');
   const navigation = useNavigation();
+  const [date, setDate] = useState(log ? new Date(log.date) : new Date());
 
   const {onCreate, onModify, onRemove} = useContext(LogContext);
   const onSave = () => {
     if (log) {
       onModify({
         id: log.id,
-        date: log.date,
+        date: date.toISOString(),
         title,
         body,
       });
@@ -26,11 +27,12 @@ const WriteScreen = ({route}) => {
       onCreate({
         title,
         body,
-        date: new Date().toISOString(),
+        date: date.toISOString(),
       });
     }
     navigation.pop();
   };
+
   const onAskRemove = () => {
     Alert.alert(
       '삭제',
@@ -61,6 +63,8 @@ const WriteScreen = ({route}) => {
           onSave={onSave}
           onAskRemove={onAskRemove}
           isEditing={!!log}
+          date={date}
+          onChangeDate={date}
         />
         <WriteEditor
           title={title}
