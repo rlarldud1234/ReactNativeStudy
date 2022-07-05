@@ -13,7 +13,7 @@ const SearchScreen = ({navigation}) => {
     keyword === ''
       ? []
       : logs.filter(log =>
-          [log.title, log.body].some(text => text.includes(keyword)),
+          [log?.title, log?.body].some(text => text.includes(keyword)),
         );
 
   if (keyword === '') {
