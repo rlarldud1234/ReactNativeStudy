@@ -39,19 +39,19 @@ const FeedListItem = ({log}) => {
   return (
     <Pressable
       style={({pressed}) => [
-        styels.block,
+        styles.block,
         Platform.OS === 'ios' && pressed && {backgroundColor: '#efefef'},
       ]}
       android_ripple={{color: '#ededed'}}
       onPress={onPress}>
-      <Text style={styels.date}>{formatDate(date)}</Text>
-      <Text style={styels.title}>{title}</Text>
-      <Text style={styels.body}>{truncate(body)}</Text>
+      <Text style={styles.date}>{formatDate(date)}</Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.body}>{truncate(body)}</Text>
     </Pressable>
   );
 };
 
-const styels = StyleSheet.create({
+const styles = StyleSheet.create({
   block: {
     backgroundColor: 'white',
     paddingHorizontal: 16,
