@@ -1,21 +1,23 @@
-import {RouteProp, useRoute} from '@react-navigation/native';
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
-import {RootStackParamList} from './types';
-
-type ArticleScreenRouteProp = RouteProp<RootStackParamList, 'Article'>;
+import {ActivityIndicator, StyleSheet} from 'react-native';
+import {useQuery} from 'react-query';
+import {getArticles} from '../api/articles';
+import Articles from '../components/Articles';
 
 const ArticlesScreen = () => {
-  const {params} = useRoute<ArticleScreenRouteProp>();
-  return (
-    <View style={styles.block}>
-      <Text>{params.id}</Text>
-    </View>
-  );
+  const {data} = useQuery('articles', getArticles);
+
+  if (!data) {
+    return <ActivityIndicator size="large" style={styles.spinner} />;
+  }
+
+  return <Articles articles={data} />;
 };
 
 const styles = StyleSheet.create({
-  block: {},
+  spinner: {
+    flex: 1,
+  },
 });
 
 export default ArticlesScreen;
